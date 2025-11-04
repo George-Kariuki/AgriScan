@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'models/scan_result.g.dart';
+import 'models/scan_result.dart';
 import 'services/db_service.dart';
 import 'screens/scan_screen.dart';
 import 'screens/history_screen.dart';
@@ -19,9 +19,10 @@ class AgriScanApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'AgriScan',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
       home: const MainScreen(),

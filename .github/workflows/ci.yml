@@ -1,0 +1,43 @@
+name: CI Tests
+
+on:
+  push:
+    branches: [ dev, main ]
+  pull_request:
+    branches: [ dev, main ]
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          cd api
+          pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          cd api
+          pytest tests/ -v
+
+  test-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+      - name: Install dependencies
+        run: |
+          cd app
+          flutter pub get
+      - name: Run tests
+        run: |
+          cd app
+          flutter test
+
